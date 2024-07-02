@@ -1,0 +1,39 @@
+.commentSection {
+    padding: 40px;
+    font-family: "Inter", "Arial", sans-serif;
+    text-align: center;
+    width: 80%;
+    background-color: #f0f0f0;
+    margin: 0 auto;
+}
+
+.commentWrapper {
+    display: flex;
+    gap: 20px;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.commentTitle {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.7);
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.commentLink {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.7);
+    margin: 0;
+}
+
+.commentScore,
+.commentTime {
+    margin: 0;
+}
+
+.commentText {
+    text-align: left;
+    margin: 0;
+}

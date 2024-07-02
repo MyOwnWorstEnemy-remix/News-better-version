@@ -1,0 +1,32 @@
+.newsTitleWrapper {
+    display: flex;
+    gap: 20px;
+}
+
+.newsTitle {
+    font-size: 20px;
+    text-align: left;
+    margin: 0;
+}
+
+.newsScore {
+    margin: 0;
+}
+
+.newsLink {
+    text-decoration: none;
+    color: rgba(0, 0, 0, 0.7);
+    margin: 0;
+}
+
+.newsInfoWrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: rgba(0, 0, 0, 0.7);
+}
+
+.newsText {
+    text-align: left;
+    font-size: 16px;
+}
