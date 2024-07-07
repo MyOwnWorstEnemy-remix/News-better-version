@@ -6,7 +6,7 @@ type newsList = number[];
 
 const limit = 15;
 
-function NewsList({ dataType } : {dataType: string}) {
+function NewsList({ dataType, update } : {dataType: string, update: boolean}) {
   const [allStories, setAllStories] = useState<newsList>([]);
   const [stories, setStories] = useState<newsList>([]);
   const [page, setPage] = useState(1);
@@ -18,11 +18,14 @@ function NewsList({ dataType } : {dataType: string}) {
 
   const fetchData  = async () => {
     try{
+      console.log("update: " + update);
       const controller = new AbortController();
       controllerRef.current = controller;
       const signal = controller.signal;
       const data = await fetch(`https://hacker-news.firebaseio.com/v0/${dataType}.json?print=pretty`, {signal});
       const newStories = await data.json();
+      setStories([]);
+      setPage(1);
       setAllStories(newStories);
       setHasMore(true);
     } 
@@ -32,18 +35,21 @@ function NewsList({ dataType } : {dataType: string}) {
   };
 
   useEffect(() => {
-    setStories([]);
-    setPage(1);
+    // console.log("before fetchData stories:  " + stories);
     fetchData();
+    // console.log("after fetchData stories:  " + stories);
     return () => {
         if (controllerRef.current) controllerRef.current.abort();
       };
-  }, [dataType]);
+  }, [dataType, update]);
 
   const addStory = () => {
     setIsInitialCall(false);
+    // console.log("addStory (current stories):  " + stories);
     if (stories.length < allStories.length) {
       const moreStories = allStories.slice((page - 1) * limit, page * limit);
+      // console.log("moreStories");
+      // console.log(moreStories);
       setStories(prevStories => [...prevStories, ...moreStories]);
       // setPage((page) => page + 1);
     } else {
@@ -52,9 +58,11 @@ function NewsList({ dataType } : {dataType: string}) {
   };
 
   useEffect(() => {
+    // console.log("stories before addStory:  " + stories);
     if (hasMore) {
       addStory();
     }
+    // console.log("stories after addStory:  " + stories);
   }, [allStories, page, hasMore]);
 
   useEffect(() => {
@@ -83,7 +91,8 @@ function NewsList({ dataType } : {dataType: string}) {
       <ul className={styles.list}>
           {stories.map((story) => (
             <li className={styles.listItem} key={story}>
-              <News pieceOfNewsToRender={story} />
+              <p>{story}</p>
+              {/* <News pieceOfNewsToRender={story} /> */}
             </li>
           ))}
       </ul>

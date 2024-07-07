@@ -13,10 +13,15 @@
     text-align: center;
   }
 
-.selectorWrapper {
+.supportWrapper {
     display: flex;
-    gap: 15px;
+    justify-content: space-between;
     margin-bottom: 15px;
+}
+
+.timerWrapper {
+  display: flex;
+  gap: 30px;
 }
 
 .selector {
